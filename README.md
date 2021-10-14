@@ -9,6 +9,7 @@
 
 ## Milestones
 - Bootstrap the web app, and install the mainly required dependencies/libraries
+-- kkk
 - Code the back end API routes, that will serve our different pages
 - Create the Homepage with it's core functionality and UI
 - Create the Registration page with it's core functionality and UI
