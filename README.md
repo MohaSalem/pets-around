@@ -5,7 +5,7 @@
 - Programming language: JavaScript
 - Back End : Node.js
 - Front End: React.js
-- Database : MongoDB
+- Database: MongoDB
 
 ## Milestones
 - Have a fully functional Home page
