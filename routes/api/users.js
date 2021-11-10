@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 router.post('/register',
     check('name', 'Name is required').notEmpty(),
     check('email', 'Valid email is required').isEmail(),
-    check('password', 'Please enter a password with 6 or more characters').isLength({min: 6}),
+    check('password', 'Please enter a password with at least 8 characters').isLength({min: 8}),
     async (req, res) => {
         const errors = validationResult(req);
 
