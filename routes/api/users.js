@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {check, validationResult} = require('express-validator');
 const User = require('../../models/User');
+const {check, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 router.post('/register',
     check('name', 'Name is required').notEmpty(),
@@ -33,11 +35,24 @@ router.post('/register',
             user.password = await bcrypt.hash(password, salt);
 
             await user.save();
-            res.send('User registration is successful');
+            const payload = {
+                user: {
+                    id: user.id
+                }
+            };
 
+            jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                {expiresIn: '24h'},
+                (err, token) => {
+                    if (err) throw err;
+                    res.json({token, msg: 'User registration is successful'});
+                }
+            );
         } catch (err) {
             console.error(err.message);
-            return res.status(500).send('Server error');
+            res.status(500).send('Server error');
         }
     }
 );
