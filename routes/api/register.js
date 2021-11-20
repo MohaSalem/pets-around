@@ -18,8 +18,10 @@ router.post('/register',
         }
 
         const {name, email, password} = req.body;
+
         try {
             let user = await User.findOne({email});
+
             if (user) {
                 return res.status(400).json({error: 'User exists'});
             }
@@ -31,9 +33,7 @@ router.post('/register',
             });
 
             const salt = await bcrypt.genSalt(10);
-
             user.password = await bcrypt.hash(password, salt);
-
             await user.save();
             const payload = {
                 user: {
@@ -41,11 +41,7 @@ router.post('/register',
                 }
             };
 
-            jwt.sign(
-                payload,
-                config.get('jwtSecret'),
-                {expiresIn: '24h'},
-                (err, token) => {
+            jwt.sign(payload, config.get('jwtSecret'), {expiresIn: '48h'}, (err, token) => {
                     if (err) throw err;
                     res.json({token, msg: 'User registration is successful'});
                 }
