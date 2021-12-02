@@ -12,7 +12,7 @@
 ## Get started
 - nvm use
 - npm install
-- npm run server
+- npm run app
 - Go to http://localhost:3000/
 
 ## Milestones
