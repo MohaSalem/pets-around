@@ -9,6 +9,12 @@
 - Front End: React.js
 - Database: MongoDB
 
+## Get started
+- nvm use
+- npm install
+- npm run server
+- Go to http://localhost:3000/
+
 ## Milestones
 
 - Have a fully functional Home page
