@@ -1,23 +1,40 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Navigate} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Landing = () => {
+const Landing = ({isAuthenticated}) => {
+    if (isAuthenticated) {
+        return <Navigate to="/dashboard"/>;
+    }
+
     return (
         <section className="landing">
             <div className="dark-overlay">
                 <div className="landing-inner">
-                    <h1 className="x-large">Pets Around</h1>
                     <p className="lead">
-                        <h1> Every pet deserves a loving owner!</h1>
+                        <h1 className="x-large">Every pet deserves a loving owner!</h1>
                     </p>
                     <div className="buttons">
-                        <Link to="/register" className="btn btn-primary">Sign Up</Link>
-                        <Link to="/login" className="btn btn-light">Login</Link>
+                        <Link to="/register" className="btn btn-primary">
+                            Sign Up
+                        </Link>
+                        <Link to="/login" className="btn btn-light">
+                            Login
+                        </Link>
                     </div>
                 </div>
             </div>
         </section>
     );
-}
+};
 
-export default Landing;
+Landing.propTypes = {
+    isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Landing);

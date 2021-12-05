@@ -10,6 +10,7 @@
 - Database: MongoDB
 
 ## Get started
+
 - nvm use
 - npm install
 - npm run app
